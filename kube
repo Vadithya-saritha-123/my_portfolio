@@ -1,0 +1,118 @@
+===========================================
+          KUBECTL COMPLETE CHEAT SHEET
+===========================================
+
+-------------------------------------------
+BASIC COMMANDS
+-------------------------------------------
+kubectl version
+kubectl cluster-info
+kubectl get nodes
+kubectl get all
+kubectl get all -n <namespace>
+
+-------------------------------------------
+PODS
+-------------------------------------------
+kubectl get pods
+kubectl get pods -A
+kubectl get pods -o wide
+kubectl describe pod <pod-name>
+kubectl logs <pod-name>
+kubectl logs -f <pod-name>
+kubectl exec -it <pod-name> -- /bin/bash
+kubectl delete pod <pod-name>
+
+-------------------------------------------
+DEPLOYMENTS
+-------------------------------------------
+kubectl get deployments
+kubectl create deployment myapp --image=nginx
+kubectl apply -f deployment.yaml
+kubectl scale deployment myapp --replicas=5
+kubectl set image deployment/myapp nginx=nginx:latest
+
+# Rollout Commands
+kubectl rollout status deployment/myapp
+kubectl rollout history deployment/myapp
+kubectl rollout undo deployment/myapp
+
+-------------------------------------------
+SERVICES
+-------------------------------------------
+kubectl get svc
+kubectl expose deployment myapp --type=LoadBalancer --port=80
+kubectl describe svc myapp
+kubectl delete svc myapp
+
+-------------------------------------------
+NAMESPACES
+-------------------------------------------
+kubectl get ns
+kubectl create ns dev
+kubectl delete ns dev
+kubectl get pods -n dev
+
+-------------------------------------------
+CONFIGMAP
+-------------------------------------------
+kubectl create configmap myconfig --from-literal=key=value
+kubectl get configmap
+kubectl describe configmap myconfig
+
+-------------------------------------------
+SECRETS
+-------------------------------------------
+kubectl create secret generic mysecret --from-literal=password=admin123
+kubectl get secret
+kubectl describe secret mysecret
+
+-------------------------------------------
+NODES
+-------------------------------------------
+kubectl get nodes
+kubectl cordon <node>
+kubectl uncordon <node>
+kubectl drain <node> --ignore-daemonsets
+
+-------------------------------------------
+DEBUG & TROUBLESHOOT
+-------------------------------------------
+kubectl describe pod <pod>
+kubectl logs <pod>
+kubectl get events
+kubectl top pod
+kubectl top node
+
+-------------------------------------------
+DELETE RESOURCES
+-------------------------------------------
+kubectl delete pod <pod>
+kubectl delete deployment <name>
+kubectl delete -f <file.yaml>
+kubectl delete ns <namespace>
+
+-------------------------------------------
+SHORTCUTS
+-------------------------------------------
+kubectl get po            # pods
+kubectl get svc           # services
+kubectl get deploy        # deployments
+kubectl get ing           # ingresses
+
+-------------------------------------------
+APPLY / EDIT / REPLACE
+-------------------------------------------
+kubectl apply -f <file.yaml>
+kubectl edit deployment <name>
+kubectl replace -f <file.yaml>
+
+-------------------------------------------
+PORT FORWARDING
+-------------------------------------------
+kubectl port-forward pod/<pod-name> 8080:80
+kubectl port-forward svc/myservice 8080:80
+
+===========================================
+      END OF KUBECTL CHEAT SHEET
+===========================================
